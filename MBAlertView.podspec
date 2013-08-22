@@ -11,7 +11,6 @@ Pod::Spec.new do |s|
   s.author       = { "Mo Bitar" => "me@mbbitar.com" }
   s.source       = { :git => "https://github.com/victorwon/MBAlertView.git" }
   s.platform     = :ios
-  s.dependency   'AutoLayoutHelpers', '~> 1.0.0'
 
   s.source_files = 'MBAlertView/**/*.{h,m}'
 
