@@ -142,6 +142,7 @@ CGFloat MBAlertViewDefaultHUDHideDelay = 0.65;
 - (void)performLayout {
     [self performLayoutOfButtons];
     [self centerViewsVertically];
+    [self rotateViews];
 }
 
 - (void)loadView {
@@ -267,10 +268,37 @@ CGFloat MBAlertViewDefaultHUDHideDelay = 0.65;
 
 // lays out button on rotation
 - (void)layoutButtonsWrapper {
-    [UIView animateWithDuration:0.3 animations:^{
+    [UIView animateWithDuration:0.3 animations:^
+    {
         [self performLayoutOfButtons];
+        [self rotateViews];
+        
     }];
     [self centerViewsVertically];
+}
+
+float M_PI2 = M_PI/2.0f;
+
+- (void)rotateViews
+{
+    float angle = 0.0f;
+    UIInterfaceOrientation orientation = [[UIApplication sharedApplication] statusBarOrientation];
+    switch (orientation)
+    {
+        case UIInterfaceOrientationPortraitUpsideDown:
+            angle = M_PI;
+            break;
+        case UIInterfaceOrientationLandscapeLeft:
+            angle = - M_PI2;
+            break;
+        case UIInterfaceOrientationLandscapeRight:
+            angle = M_PI2;
+            break;
+        default:
+            angle = 0.0f;
+            break;
+    }
+    self.contentView.transform = CGAffineTransformMakeRotation(angle);
 }
 
 - (void)layoutButtonCollecitonView {
