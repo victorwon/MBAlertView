@@ -155,7 +155,8 @@ static MBAlertAbstract *currentAlert;
         MBAlertAbstract *current = [dismissQueue lastObject];
         [displayQueue removeObject:current];
         [current dismiss];
-        [dismissQueue removeLastObject];
+        // commented out by Victor, this is a bug as the obj has already been removed from dismissQueue when calling [current dismiss], double remove without dismiss will leave the HUD on screen when multiple exists.
+        // [dismissQueue removeLastObject];
     }
 }
 
